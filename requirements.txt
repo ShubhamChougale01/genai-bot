@@ -15,4 +15,4 @@ requests
 tqdm
 pytest
 pydantic
-
+numexpr
