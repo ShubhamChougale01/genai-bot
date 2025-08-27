@@ -105,7 +105,7 @@ This executes the test queries defined in `main.py`:
 **2. Test cases**
 <img width="794" height="781" alt="Screenshot 2025-08-27 at 1 56 03 PM" src="https://github.com/user-attachments/assets/0b1c3640-b754-452a-b665-ce3dbbbab46e" />
 
-**3. Agent: Reasoning Capability / Tool Access **
+**3. Agent: Reasoning Capability / Tool Access**
 <img width="1059" height="748" alt="Screenshot 2025-08-27 at 1 57 23 PM" src="https://github.com/user-attachments/assets/7b0288a8-f1ca-4f2e-80d9-860092692b8f" />
 <img width="993" height="247" alt="Screenshot 2025-08-27 at 1 58 14 PM" src="https://github.com/user-attachments/assets/18a81ecf-5934-4643-814b-1c292c47a0b2" />
 <img width="985" height="715" alt="Screenshot 2025-08-27 at 1 58 29 PM" src="https://github.com/user-attachments/assets/16f9f74d-b768-46ef-846d-9fcf134f3470" />
