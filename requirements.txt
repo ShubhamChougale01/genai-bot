@@ -1,7 +1,6 @@
 streamlit
 python-dotenv
 langchain
-langgraph
 langchain_groq
 langchain_community
 langchain_core
@@ -10,9 +9,5 @@ sentence-transformers
 langchain-huggingface==0.0.3
 pypdf
 duckduckgo-search
-beautifulsoup4
 requests
 tqdm
-pytest
-pydantic
-numexpr
