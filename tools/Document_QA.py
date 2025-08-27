@@ -18,8 +18,7 @@ llm = ChatGroq(
     model="gemma2-9b-it", 
     api_key=os.getenv("GROQ_API_KEY"),
     temperature=0.1,
-    max_tokens=100,
-    top_p=0.9,         
+    max_tokens=100     
     )
 
 def vector_storage(pdf_path: str, index_dir: str):
