@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
-from langchain.agents import create_tool_calling_agent, AgentExecutor, Tool
-from langchain.prompts import PromptTemplate
+from langchain.agents import initialize_agent, AgentType, Tool
 from langchain_groq import ChatGroq
 from langchain.memory import ConversationBufferMemory
 from tools.Document_QA import rag_chain
@@ -19,30 +18,20 @@ llm = ChatGroq(
 
 pdf_qa_chain = rag_chain()
 
-def pdf_tool_func(query: str) -> str:
-    return pdf_qa_chain.invoke({"query": query})["result"]
-
-def calculator_func(query: str) -> str:
-    return calculator_tool(query)
-
-def web_search_func(query: str) -> str:
-    return web_search_tool(query)
-
-
 tools = [
     Tool(
         name="pdf_qa",
-        func=pdf_tool_func,
+        func=lambda query: pdf_qa_chain.invoke({"query": query})["result"],
         description="Use the tool to answer questions about Generative AI concepts, challenges, or introductory topics from the genai_intro.pdf document."
     ),
     Tool(
         name="calculator",
-        func=calculator_func,
+        func=calculator_tool,
         description="Use this tool to perform arithmetic operations."
     ),
     Tool(
         name="web_search",
-        func=web_search_func,
+        func=web_search_tool,
         description="Use this to search information on the web and always return answers in English only."
     )
 ]
@@ -52,45 +41,18 @@ memory = ConversationBufferMemory(
     return_messages=True       
 )
 
-prompt = PromptTemplate(
-    input_variables=["input", "chat_history", "agent_scratchpad"],
-    template="""
-You are a helpful assistant with access to the tools: pdf_qa, calculator, web_search.
-
-Chat history:  
-{chat_history}
-Instructions:
-- When the user asks a question, think step by step.
-- Decide which tool to call, if any.
-- Use ONLY the tools listed above.
-- If you use a tool, show your reasoning in the scratchpad, then provide the final answer.
-- Always respond in English.
-- Do NOT answer questions that do not involve the listed tools.
-- Never provide personal information (e.g., email, phone number, or sensitive data).
- 
-
-Question: {input}
-{agent_scratchpad}
-"""
-)
-
-agent = create_tool_calling_agent(
-    llm=llm, 
-    tools=tools, 
-    prompt=prompt
-)
-
-agent_executor = AgentExecutor(
-    agent=agent,
+agent = initialize_agent(
     tools=tools,
-    memory=memory,   
-    verbose=False,
+    llm=llm,
+    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    memory=memory,
+    verbose=True
 )
+
 
 def answer_query(query: str) -> str:
     try:
-        result = agent_executor.invoke({"input": query})
-        return result["output"] 
+        return agent.run(query)
     except Exception as e:
         return f"Error: {e}"
 
