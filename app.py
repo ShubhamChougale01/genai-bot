@@ -1,8 +1,8 @@
 import streamlit as st
 from main import answer_query 
 
-st.set_page_config(page_title="GenAI Bot", layout="centered")
-st.title("AI Chatbot Capabilities")
+st.set_page_config(page_title="Gen AI Bot", layout="centered")
+st.title("Gen AI Chatbot")
 st.markdown("""
 Hello! This AI chatbot can help you with the following tasks:
 
