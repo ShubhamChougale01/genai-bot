@@ -19,7 +19,7 @@ for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-query = st.chat_input("Type your question here...")
+query = st.chat_input("User query : ")
 
 if query:
     st.session_state.messages.append({"role": "user", "content": query})
