@@ -11,8 +11,8 @@ load_dotenv()
 os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-PDF_PATH = "/Doc/genai_intro.pdf"
-INDEX_DIR = "/genai_bot/faiss_index"
+PDF_PATH = "/Users/shubham/genai_bot/Doc/genai_intro.pdf"
+INDEX_DIR = "/Users/shubham/genai_bot/Doc/faiss_index"
 
 llm = ChatGroq(
     model="gemma2-9b-it", 
